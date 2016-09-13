@@ -7,4 +7,11 @@ body {
 
 #map {
   height: 100%;
+  float: left;
+  width: 65%;
+}
+#right-panel {
+  float: right;
+  width: 33%;
+  height: 100%;
 }

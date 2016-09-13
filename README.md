@@ -7,7 +7,7 @@ The mission is to give every day running some friendly competition and community
 
 Change Log
 ------------
-
+Okay I think I am ready to actually make a thing.
 
 Made by J.T. Wright 
 -----------------

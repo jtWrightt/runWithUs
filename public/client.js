@@ -1,6 +1,10 @@
 function initMap() {
-  var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService({});
+  var directionsDisplay = new google.maps.DirectionsRenderer({
+    draggable:true,
+    map:map,
+    panel: document.getElementById('right-panel')
+  });
   startPos = "";
   endPos = "";
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,6 +31,11 @@ function initMap() {
       map.setCenter(pos);
     });
   }
+  
+  directionsDisplay.addListener('directions_changed', function() {
+    computeTotalDistance(directionsDisplay.getDirections());
+  });
+  
   var onChangeHandler = function() {
     calculateAndDisplayRoute(directionsService, directionsDisplay, pos);
   };
@@ -86,4 +95,28 @@ function calculateAndDisplayRoute (directionsService, directionsDisplay) {
   
 }
 
-
+function computeTotalDistance(result) {
+  var total = 0;
+  var myRoute = result.routes[0];
+  var mes = " meters";
+  for (var i = 0;i<myRoute.legs.length;i++) {
+    total += myRoute.legs[i].distance.value;
+  }
+  if(document.getElementById('km').checked) {
+    if(total/1000 < 1) {
+    } else {
+      total = total / 1000;
+      mes = " km";
+  }
+  } else {
+    if(total*3.28<5280) {
+      total = total * 3.28;
+      mes = " feet";
+    } else {
+      total = (total/1000)*0.62;
+      mes = " miles";
+    }
+    
+  }
+  document.getElementById('total').innerHTML = total.toFixed(3) + mes;
+}
