@@ -24,12 +24,13 @@
   </head>
     <body>
       <div id="map"></div>
-      <select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
+      <div id="right-panel">
+        <p>Total Distance: <span id="total"></span></p>
+        <form>
+          <input type="radio" id="mile" name="dist">Imperial
+          <input type="radio" id="km" name="dist" checked>Metric
+        </form>
+      </div>
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
